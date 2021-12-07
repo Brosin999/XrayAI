@@ -213,8 +213,8 @@ function RefillState:__init(miner)
 end
 
 local function place_chest()
-  local bool,item = turtle.inspectDown()
-  if bool and item.name:find("chest") then
+  local bool,block = turtle.inspectDown()
+  if bool and block.name:find("chest") then
     return
   end
   local item = turtle.getItemDetail(CHEST_SLOT)
