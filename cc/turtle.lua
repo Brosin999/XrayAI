@@ -183,6 +183,12 @@ function turtle.goTo(x,y,z)
   turtle.goToHeight(y-turtle.y)
 end
 
+function turtle.returnTo(x,y,z)
+  turtle.goToHeight(y-turtle.y)
+  turtle.goToVar(x-turtle.x, 2, 4)
+  turtle.goToVar(z-turtle.z, 3, 1)
+end
+
 --for key, func in pairs(slurtle) do
   --if not turtle[key] then
     --turtle[key] = func

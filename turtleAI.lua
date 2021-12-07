@@ -185,7 +185,8 @@ function XrayMineState:act()
   -- switch to tunnel state
   
   local target = self.miner.ore_path[-1]
-  turtle.goTo(target[0], target[1], target[2])
+  local func = (#self.miner.ore_path<=1) and turtle.returnTo or turtle.goTo
+  func(target[0], target[1], target[2])
   self.miner.ore_path:pop()
   if not invo_has_empty_slot() then
     dump_trash(true)
@@ -223,7 +224,7 @@ function RefillState:act()
   -- digDown and placeDown chest
   -- dropDown nontrash items
   -- change back to xray state
-  turtle.goTo(0,1,0)
+  turtle.returnTo(0,1,0)
   place_chest()
   store_valuables()
   if #self.miner.ore_path > 0 then
