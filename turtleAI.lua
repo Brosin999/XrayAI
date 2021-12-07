@@ -170,7 +170,6 @@ function ScanState:scan()
     :filter(function(block) return block.name:find(TARGET) end)
     :map(function(block) return List(block.x, block.y, block.z) end)
   
-  ores:sort(function(a,b) return a[2] < b[2] end)
   ores:insert(0, List(0,1,0))
   local route = pathfind(ores):map(function(i) return ores[i] end)
   
