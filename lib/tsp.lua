@@ -4,7 +4,6 @@ local util = require "lib/util"
 local range, println = util.range, util.println
 
 local function findMinRoute(tsp)
-  local sum = 0
   local counter = 0
   local j,i = 0,0
   local min = 1/0
@@ -30,7 +29,6 @@ local function findMinRoute(tsp)
     j = j + 1
     
     if j == #tsp[0] then
-      sum = sum + min
       min = 1/0
       visitedRouteList:append(route[counter] - 1)
       
@@ -47,24 +45,8 @@ local function findMinRoute(tsp)
       route[counter] = j + 1
     end
   end
-  sum = sum + min
   
-  --println("Minimum Cost is: {}", sum)
-  --print(visitedRouteList:map(function(num) return num+1 end))
   return visitedRouteList
 end
 
-
-local function main()
-  local tsp = List(
-    List(-1, 10, 15, 20),
-    List(10, -1, 35, 25),
-    List(15, 35, -1, 30),
-    List(20, 25, 30, -1)
-  )
-  --print(tsp)
-  findMinRoute(tsp)
-end
-
---main()
 return findMinRoute
