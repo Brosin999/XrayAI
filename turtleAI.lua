@@ -51,7 +51,8 @@ assert(DIRECTIONS[START_DIR], "must specify a direction")
 -- startup place ender teleporter underneath (if gps then continue mining)
 local function refuel()
   for i in STORAGE_SLOTS() do
-    if turtle.getItemDetail(i).name:find("coal") then
+    local item = turtle.getItemDetail(i)
+    if item and item.name:find("coal") then
       turtle.select(i)
       turtle.refuel()
     end
@@ -119,7 +120,7 @@ function TunnelState:act()
   if turtle.getFuelLevel() < 300 then
     refuel()
     if turtle.getFuelLevel() < 300 then
-      error("out of fuel")
+      error("Out of fuel")
     end
   end
   turtle.turnTo(DIRECTIONS[START_DIR])
