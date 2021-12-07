@@ -86,6 +86,11 @@ function turtle.select(i)
   return true
 end
 
+function turtle.getSelectedSlot()
+  print("getSelectedSlot")
+  return 1
+end
+
 function turtle.getItemCount(i)
   print("getItemCount "..tostring(i))
   return math.random(1,10)

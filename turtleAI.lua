@@ -48,8 +48,8 @@ local REPEATS = tArgs[2] or 1
 assert(DIRECTIONS[START_DIR], "must specify a direction")
 
 
--- startup place ender teleporter underneath (if gps then continue mining)
 local function refuel()
+  local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
     if item and item.name:find("coal") then
@@ -60,6 +60,7 @@ local function refuel()
       return
     end
   end
+  turtle.select(slot)
 end
 
 local function tunnel(N)
@@ -81,6 +82,7 @@ local function invo_has_empty_slot()
 end
 
 local function dump_trash(stacks_only)
+  local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
     if TRASH[item.name] then
@@ -92,9 +94,11 @@ local function dump_trash(stacks_only)
       end
     end
   end
+  turtle.select(slot)
 end
 
 local function store_valuables()
+  local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
     if not TRASH[item.name] then
@@ -102,6 +106,7 @@ local function store_valuables()
       turtle.dropDown(64)
     end
   end
+  turtle.select(slot)
 end
 
 local TunnelState = class()
@@ -117,6 +122,12 @@ function TunnelState:act()
   -- tunnel forward 16 blocks
   -- switch to scan state
   
+  
+  self.miner.i = self.miner.i + 1
+  if self.miner.i > REPEATS then
+    error("User specified max mining cycles reached")
+  end
+  
   if turtle.getFuelLevel() < 300 then
     refuel()
     if turtle.getFuelLevel() < 300 then
@@ -126,10 +137,6 @@ function TunnelState:act()
   turtle.turnTo(DIRECTIONS[START_DIR])
   tunnel(16)
   self.miner:change_state("ScanState")
-end
-
-local function scan()
-
 end
 
 local ScanState = class()
@@ -211,7 +218,8 @@ local function place_chest()
   if bool and item.name:find("chest") then
     return
   end
-  if turtle.getItemCount(CHEST_SLOT) <= 0 then
+  local item = turtle.getItemDetail(CHEST_SLOT)
+  if (not item) or (not item.name:find("chest")) or (item.count <= 0) then
     error("Out of inventory space")
   end
   turtle.select(CHEST_SLOT)
@@ -246,6 +254,7 @@ local Miner = class()
 function Miner:__init()
   self.state = TunnelState(self)
   self.ore_path = List()
+  self.i = 0
 end
 
 function Miner:act()
@@ -259,17 +268,8 @@ end
 
 -- use coroutine to check inventory
 
-
 turtle.reset(0,1,0,START_DIR)
 local miner = Miner()
-for _=1,100 do
-  miner:act()
-  miner:act()
-  miner:act()
-  miner:act()
-  miner:act()
-  miner:act()
-  miner:act()
+while true do
   miner:act()
 end
-print(miner.ore_path)
