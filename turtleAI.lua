@@ -43,7 +43,7 @@ local DIRECTIONS = {north=1, east=2, south=3, west=4}
 
 local tArgs = {...}
 local START_DIR = tArgs[1]
-local REPEATS = tArgs[2] or 1
+local REPEATS = tonumber(tArgs[2]) or 1
 
 assert(DIRECTIONS[START_DIR], "must specify a direction")
 
