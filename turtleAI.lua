@@ -31,12 +31,12 @@ local CHEST_SLOT = 15
 local STORAGE_SLOTS = List(1,2,3,4,5,6,7,8,9,10,11,12,13)
 
 local TRASH = {
-  "minecraft:cobblestone",
-  "minecraft:diorite",
-  "minecraft:granite",
-  "minecraft:andesite",
-  "minecraft:dirt",
-  "minecraft:gravel"
+  ["minecraft:cobblestone"] = 1,
+  ["minecraft:diorite"] = 2,
+  ["minecraft:granite"] = 3,
+  ["minecraft:andesite"] = 4,
+  ["minecraft:dirt"] = 5,
+  ["minecraft:gravel"] = 6
 }
 
 local DIRECTIONS = {north=1, east=2, south=3, west=4}
