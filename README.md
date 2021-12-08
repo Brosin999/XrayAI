@@ -1,5 +1,5 @@
 # XrayAI
-Turtle AI that finds the shortest path to mine all the ores
+Turtle AI that finds the shortest path to mine all the ores  
 ( Advanced version of the XrayMiner)
 ~~~
 Usage: turtleAI <direction> [repeats] -- tunnels 16 blocks forward, then proceeds to mine all ores in an 8 block radius
