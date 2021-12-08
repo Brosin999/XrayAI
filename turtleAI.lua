@@ -2,7 +2,7 @@ local class = require "lib/class"
 local util = require "lib/util"
 local List = require "lib/list"
 local turtle = require "cc/turtle"
-local pathfind = require "xray_pathfind"
+local pathfind = require "lib/xray_pathfind"
 
 local all = util.all
 
