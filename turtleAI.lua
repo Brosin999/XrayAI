@@ -67,7 +67,7 @@ local function dump_trash(stacks_only)
   local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
-    if TRASH[item.name] then
+    if item and TRASH[item.name] then
       if stacks_only and item.count < 64 then
         
       else
@@ -83,7 +83,7 @@ local function store_valuables()
   local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
-    if not TRASH[item.name] then
+    if item and not TRASH[item.name] then
       turtle.select(i)
       turtle.dropDown(64)
     end
