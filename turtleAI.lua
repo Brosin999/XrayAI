@@ -1,21 +1,3 @@
--- never gets stuck or lost or runs out of inventory space
-
--- handle low fuel
--- use gps to determine pos of self
-
--- continues down the tunnel path
--- stores supplies in basic chests down the tunnel path
-
--- continually removes cobblestone from inventory (and other trash)
-
-
--- turtle full (no empty slots) event -> throw away trash and/or store things away 
--- turtle startup event -> continue or go home
--- turtle low on fuel event -> continue or go home
-
--- y 15 or y 16 (at least 9 blocks above bedrock)
-
--- turtles with ender modems? no pearls :(
 local class = require "lib/class"
 local util = require "lib/util"
 local List = require "lib/list"
@@ -235,6 +217,7 @@ function RefillState:act()
   turtle.returnTo(0,1,0)
   place_chest()
   store_valuables()
+  dump_trash()
   if #self.miner.ore_path > 0 then
     self.miner:change_state("XrayMineState")
   else
@@ -264,11 +247,12 @@ function Miner:change_state(state)
   self.state = STATES[state](self)
 end
 
-
--- use coroutine to check inventory
-
-turtle.reset(0,1,0,START_DIR)
-local miner = Miner()
-while true do
-  miner:act()
+local function main()
+  turtle.reset(0,1,0,START_DIR)
+  local miner = Miner()
+  while true do
+    miner:act()
+  end
 end
+
+main()
