@@ -2,7 +2,6 @@ local class = require "lib/class"
 local List = require "lib/list"
 local util = require "lib/util"
 local tsp = require "lib/tsp"
-local combinations = require "lib/combinations"
 
 local all, range, izip, println, print = util.all, util.range, util.izip, util.println, util.print
 
