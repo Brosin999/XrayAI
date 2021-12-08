@@ -4,9 +4,12 @@ if tArgs[1] == "uninstall" then
   shell.run("rm *.lua")
   shell.run("cd ..")
   shell.run("rmdir lib")
+  
   shell.run("cd cc")
   shell.run("rm *.lua")
+  shell.run("cd ..")
   shell.run("rmdir cc")
+  
   shell.run("rm startup.lua")
   shell.run("rm turtleAI.lua")
   shell.run("xray_pathfind.lua")
