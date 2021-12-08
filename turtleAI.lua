@@ -203,6 +203,7 @@ local function place_chest()
   if (not item) or (not item.name:find("chest")) or (item.count <= 0) then
     error("Out of inventory space")
   end
+  turtle.digDown()
   turtle.select(CHEST_SLOT)
   turtle.placeDown()
 end
