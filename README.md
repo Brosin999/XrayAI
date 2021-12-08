@@ -16,5 +16,5 @@ wget run https://raw.githubusercontent.com/GuitarMusashi616/XrayAI/main/startup.
 ```
 
 #### Required Mods:
-*cc-tweaked-1.16.5-1.98.1.jar  
-*Advanced Peripherals 0.7r
+* cc-tweaked-1.16.5-1.98.1.jar  
+* Advanced Peripherals 0.7r
