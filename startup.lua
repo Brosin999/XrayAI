@@ -1,5 +1,5 @@
 local tArgs = {...}
-if tArgs[1] == "uninstall"
+if tArgs[1] == "uninstall" then
   shell.run("cd lib")
   shell.run("rm *.lua")
   shell.run("cd ..")
