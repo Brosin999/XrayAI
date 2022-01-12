@@ -3,13 +3,15 @@ local util = require "lib/util"
 
 local range, println = util.range, util.println
 
+-- Usage: tsp(distances[a][b]) --> List(0, 2, 1)
+
+
 local function findMinRoute(tsp)
   local counter = 0
   local j,i = 0,0
   local min = 1/0
   
   local visitedRouteList = List()
-  
   visitedRouteList:append(0)
   local route = List(0)*#tsp
   

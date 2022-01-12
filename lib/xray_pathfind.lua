@@ -5,7 +5,7 @@ local tsp = require "lib/tsp"
 
 local all, range, izip, println, print = util.all, util.range, util.izip, util.println, util.print
 
-
+-- usage pathfind(List(List(10,9,8), List(5,4,3))) -> List(List(5,4,3),List(10,9,8))
 local Point = class()
 
 function Point:__init(x,y,z)
@@ -54,15 +54,15 @@ function Edge:__tostring()
   return str
 end
 
-local function pathfind(coords)
+local function pathfind(coords)  
   if #coords <= 1 then
     print("no targets found")
-    return coords
+    return List(range(#coords))
   end
   
-  if #coords > 80 then
+  if #coords > 10000 then
     print("too many ores for tsp")
-    return coords
+    return List(range(#coords))
   end
   local points = coords:map(function(coord) return Point(coord[0], coord[1], coord[2]) end)
   --print(points)
