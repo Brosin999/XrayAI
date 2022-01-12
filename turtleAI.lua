@@ -11,6 +11,7 @@ local DEFAULT_RADIUS = 8
 local GEOSCAN_SLOT = 16
 local CHEST_SLOT = 15
 local STORAGE_SLOTS = List(1,2,3,4,5,6,7,8,9,10,11,12,13)
+local WAIT_TIME_BEFORE_SCANNING = 3
 
 local TRASH = {
   ["minecraft:cobblestone"] = 1,
@@ -146,6 +147,7 @@ function ScanState:act()
 end
 
 function ScanState:scan()
+  sleep(WAIT_TIME_BEFORE_SCANNING)
   local blocks = peripheral.call("bottom","scan", DEFAULT_RADIUS)
   blocks = List(all(blocks))
   local ores = blocks
