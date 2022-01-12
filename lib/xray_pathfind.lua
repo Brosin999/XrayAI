@@ -5,7 +5,9 @@ local tsp = require "lib/tsp"
 
 local all, range, izip, println, print = util.all, util.range, util.izip, util.println, util.print
 
--- usage pathfind(List(List(10,9,8), List(5,4,3))) -> List(List(5,4,3),List(10,9,8))
+-- Usage: pathfind([[10,9,8], [5,4,3]]) -> [1, 0] 
+-- input: (list of xyz lists) 
+-- output: (list of indices of first list)
 local Point = class()
 
 function Point:__init(x,y,z)
@@ -60,7 +62,7 @@ local function pathfind(coords)
     return List(range(#coords))
   end
   
-  if #coords > 10000 then
+  if #coords > 250 then -- too long without yielding error at 313
     print("too many ores for tsp")
     return List(range(#coords))
   end

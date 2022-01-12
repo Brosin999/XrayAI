@@ -4,7 +4,8 @@ local util = require "lib/util"
 local range, println = util.range, util.println
 
 -- Usage: tsp(distances[a][b]) --> List(0, 2, 1)
-
+-- input: List of List of distance int (distance between point index 1 and point index 2)
+-- output: List of point indices in order of route
 
 local function findMinRoute(tsp)
   local counter = 0
