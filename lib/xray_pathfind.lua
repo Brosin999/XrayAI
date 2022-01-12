@@ -55,6 +55,15 @@ function Edge:__tostring()
 end
 
 local function pathfind(coords)
+  if #coords <= 1 then
+    print("no targets found")
+    return coords
+  end
+  
+  if #coords > 80 then
+    print("too many ores for tsp")
+    return coords
+  end
   local points = coords:map(function(coord) return Point(coord[0], coord[1], coord[2]) end)
   --print(points)
   local N = #points
