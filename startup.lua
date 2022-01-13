@@ -27,6 +27,7 @@ shell.run("wget https://raw.githubusercontent.com/GuitarMusashi616/XrayAI/main/l
 shell.run("wget https://raw.githubusercontent.com/GuitarMusashi616/XrayAI/main/lib/tsp.lua")
 shell.run("wget https://raw.githubusercontent.com/GuitarMusashi616/XrayAI/main/lib/util.lua")
 shell.run("wget https://raw.githubusercontent.com/GuitarMusashi616/XrayAI/main/lib/xray_pathfind.lua")
+shell.run("wget https://raw.githubusercontent.com/GuitarMusashi616/XrayAI/main/lib/nearest_neighbor.lua")
 shell.run("cd ..")
 shell.run("mkdir cc")
 shell.run("cd cc")
