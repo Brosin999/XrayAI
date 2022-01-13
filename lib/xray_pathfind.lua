@@ -63,6 +63,11 @@ local function pathfind(coords)
     return List(range(#coords))
   end
   
+  if #coords > 400 then
+    print("too many ores for nearest neighbor and tsp")
+    return List(range(#coords))
+  end
+  
   local points = coords:map(function(coord) return Point(coord[0], coord[1], coord[2]) end)
   --print(points)
   local N = #points
