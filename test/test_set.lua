@@ -39,3 +39,4 @@ function test_simple()
 end
 
 test_simple()
+--print(pathfind(make(300)))

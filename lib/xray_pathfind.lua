@@ -2,6 +2,7 @@ local class = require "lib/class"
 local List = require "lib/list"
 local util = require "lib/util"
 local tsp = require "lib/tsp"
+local nn = require "lib/nearest_neighbor"
 
 local all, range, izip, println, print = util.all, util.range, util.izip, util.println, util.print
 
@@ -62,10 +63,6 @@ local function pathfind(coords)
     return List(range(#coords))
   end
   
-  if #coords > 250 then -- too long without yielding error at 313
-    print("too many ores for tsp")
-    return List(range(#coords))
-  end
   local points = coords:map(function(coord) return Point(coord[0], coord[1], coord[2]) end)
   --print(points)
   local N = #points
@@ -82,6 +79,10 @@ local function pathfind(coords)
     end
   end
   
+  if #coords > 200 then -- too long without yielding error at 313
+    print("too many ores for tsp")
+    return nn(distances)
+  end
   
   --print(distances)
   local route = tsp(distances)
