@@ -1,4 +1,5 @@
 local List = require "lib/list"
+local Set = require "lib/set"
 local util = require "lib/util"
 
 local range, println = util.range, util.println
@@ -12,8 +13,10 @@ local function findMinRoute(tsp)
   local j,i = 0,0
   local min = 1/0
   
-  local visitedRouteList = List()
-  visitedRouteList:append(0)
+  local visitedRouteList = Set()
+  local finalRoute = List()
+  finalRoute:append(0)
+  visitedRouteList:add(0)
   local route = List(0)*#tsp
   
   while i < #tsp[0] and 
@@ -33,7 +36,8 @@ local function findMinRoute(tsp)
     
     if j == #tsp[0] then
       min = 1/0
-      visitedRouteList:append(route[counter] - 1)
+      visitedRouteList:add(route[counter] - 1)
+      finalRoute:append(route[counter] - 1)
       
       j = 0
       i = route[counter] - 1
@@ -49,7 +53,7 @@ local function findMinRoute(tsp)
     end
   end
   
-  return visitedRouteList
+  return finalRoute
 end
 
 return findMinRoute

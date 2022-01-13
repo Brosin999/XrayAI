@@ -74,9 +74,14 @@ local function pathfind(coords)
   local distances = List:zeroes(N, N)
   for i, p1 in points(true) do
     for j, p2 in points(true) do
-      distances[i][j] = p1-p2
+      if distances[i][j] == 0 then
+        local dist = p1-p2
+        distances[i][j] = dist
+        distances[j][i] = dist
+      end
     end
   end
+  
   
   --print(distances)
   local route = tsp(distances)
