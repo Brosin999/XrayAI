@@ -7,7 +7,81 @@ local pathfind = require "lib/xray_pathfind"
 local all = util.all
 
 local TARGET = "ore"
-local DEFAULT_RADIUS = 8
+local ORE_DICT = {
+  -- ## BASE ORES ##
+  ["minecraft:iron_ore"] = true,
+  ["minecraft:deepslate_iron_ore"] = true,
+  ["minecraft:copper_ore"] = true,
+  ["minecraft:deepslate_copper_ore"] = true,
+  ["minecraft:gold_ore"] = true,
+  ["minecraft:deepslate_gold_ore"] = true,
+  ["minecraft:diamond_ore"] = true,
+  ["minecraft:deepslate_diamond_ore"] = true,
+  ["minecraft:coal_ore"] = true,
+  ["minecraft:deepslate_coal_ore"] = true,
+  ["minecraft:lapis_ore"] = true,
+  ["minecraft:deepslate_lapis_ore"] = true,
+  ["minecraft:emerald_ore"] = true,
+  ["minecraft:deepslate_emerald_ore"] = true,
+  ["minecraft:quartz_ore"] = true,
+  ["minecraft:nether_quartz_ore"] = true,
+  ["minecraft:redstone_ore"] = true,
+  ["minecraft:deepslate_redstone_ore"] = true,
+  ["minecraft:nether_gold_ore"] = true,
+  ["minecraft:ancient_debris"] = true,
+  ["minecraft:glowstone"] = true, -- Not technically an ore, but some might consider it worth collecting if we stumble upon it!
+
+  -- ##  MODDED ORES  ##
+  -- Create
+  ["create:zinc_ore"] = true,
+  ["create_deepslate_zinc_ore"] = true,
+
+  -- Mekanism
+  ["mekanism:tin_ore"] = true,
+  ["mekanism:deepslate_tin_ore"] = true,
+  ["mekanism:osmium_ore"] = true,
+  ["mekanism:deepslate_osmium_ore"] = true,
+  ["mekanism:uranium_ore"] = true,
+  ["mekanism:deepslate_uranium_ore"] = true,
+  ["mekanism:fluorite_ore"] = true,
+  ["mekanism:deepslate_fluorite_ore"] = true,
+  ["mekanism:lead_ore"] = true,
+  ["mekanism:deepslate_lead_ore"] = true,
+
+  -- Thermal
+  ["thermal:apatite_ore"] = true,
+  ["thermal:deepslate_apatite_ore"] = true,
+  ["thermal:cinnabar_ore"] = true,
+  ["thermal:deepslate_cinnabar_ore"] = true,
+  ["thermal:niter_ore"] = true,
+  ["thermal:deepslate_niter_ore"] = true,
+  ["thermal:sulfur_ore"] = true,
+  ["thermal:deepslate_sulfur_ore"] = true,
+  ["thermal:tin_ore"] = true,
+  ["thermal:deepslate_tin_ore"] = true,
+  ["thermal:lead_ore"] = true,
+  ["thermal:deepslate_lead_ore"] = true,
+  ["thermal:silver_ore"] = true,
+  ["thermal:deepslate_silver_ore"] = true,
+  ["thermal:nickel_ore"] = true,
+  ["thermal:deepslate_nickel_ore"] = true,
+  ["thermal:ruby_ore"] = true,
+  ["thermal:deepslate_ruby_ore"] = true,
+  ["thermal:sapphire_ore"] = true,
+  ["thermal:deepslate_sapphire_ore"] = true,
+
+  -- RFTools-Base
+  ["rftoolsbase:dimensionalshard_overworld"] = true,
+  ["rftoolsbase:dimensionalshard_nether"] = true,
+  ["rftoolsbase:dimensionalshard_end"] = true,
+
+  -- Deep Resonance
+  ["deepresonance:resonating_ore_stone"] = true,
+  ["deepresonance:resonating_ore_deepslate"] = true,
+  ["deepresonance:resonating_ore_nether"] = true,
+  ["deepresonance:resonating_ore_end"] = true,
+}
+
 local GEOSCAN_SLOT = 16
 local CHEST_SLOT = 15
 local STORAGE_SLOTS = List(1,2,3,4,5,6,7,8,9,10,11,12,13)
@@ -19,7 +93,10 @@ local TRASH = {
   ["minecraft:granite"] = 3,
   ["minecraft:andesite"] = 4,
   ["minecraft:dirt"] = 5,
-  ["minecraft:gravel"] = 6
+  ["minecraft:gravel"] = 6,
+  ["minecraft:cobbled_deepslate"] = 7,
+  ["minecraft:rooted_dirt"] = 8,
+  ["minecraft:netherrack"] = 9
 }
 
 local DIRECTIONS = {north=1, east=2, south=3, west=4}
@@ -27,6 +104,7 @@ local DIRECTIONS = {north=1, east=2, south=3, west=4}
 local tArgs = {...}
 local START_DIR = tArgs[1]
 local REPEATS = tonumber(tArgs[2]) or 1
+local DEFAULT_RADIUS = tonumber(tArgs[3]) or 8 
 
 assert(DIRECTIONS[START_DIR], "must specify a direction")
 
@@ -68,12 +146,9 @@ local function dump_trash(stacks_only)
   local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
-    if item and TRASH[item.name] then
-      if stacks_only and item.count < 64 then
-        
-      else
-        turtle.select(i)
-        turtle.drop(64)
+    if item and not ORE_DICT[item.name] then
+      turtle.select(i)
+      turtle.drop(64)
       end
     end
   end
@@ -84,7 +159,7 @@ local function store_valuables()
   local slot = turtle.getSelectedSlot()
   for i in STORAGE_SLOTS() do
     local item = turtle.getItemDetail(i)
-    if item and not TRASH[item.name] then
+    if item and ORE_DICT[item.name] then
       turtle.select(i)
       turtle.dropDown(64)
     end
@@ -118,7 +193,10 @@ function TunnelState:act()
     end
   end
   turtle.turnTo(DIRECTIONS[START_DIR])
-  tunnel(16)
+  if self.miner.i == 1 then
+    tunnel(1)
+  else 
+    tunnel(DEFAULT_RADIUS * 2)
   self.miner:change_state("ScanState")
 end
 
