@@ -219,9 +219,7 @@ function ScanState:act()
   turtle.placeDown()
   self:scan()
   turtle.digDown()
-  if self.miner.i == 1 then
-    turtle.reset(0,1,0,START_DIR)
-  end
+  turtle.reset(0,1,0,START_DIR)
   self.miner:change_state("XrayMineState")
 end
 
