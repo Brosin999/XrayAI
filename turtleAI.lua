@@ -239,7 +239,7 @@ function ScanState:scan()
   local blocks = peripheral.call("bottom","scan", DEFAULT_RADIUS)
   blocks = List(all(blocks))
   local ores = blocks
-    :filter(function(block) return block.name:find(TARGET) end)
+    :filter(function(block) return ORE_DICT[block.name] end)
     :map(function(block) return List(block.x, block.y, block.z) end)
   
   ores:insert(0, List(0,1,0))
