@@ -81,6 +81,9 @@ local ORE_DICT = {
   ["deepresonance:resonating_ore_nether"] = true,
   ["deepresonance:resonating_ore_end"] = true,
 
+  -- ## TINKERS' CONSTRUCT ORES ##
+  ["tconstruct:cobalt_ore"] = true,
+
     -- ## OVERWORLD LOGS ##
   ["minecraft:oak_log"] = true,
   ["minecraft:spruce_log"] = true,
@@ -94,7 +97,12 @@ local ORE_DICT = {
 }
 
 filters = {
-  ["netherite"] = {["minecraft:ancient_debris"] = true},
+  ["netherite"] = {
+    ["minecraft:ancient_debris"] = true,
+    ["minecraft:gold_block"] = true,
+    -- ## TINKERS' CONSTRUCT ORES ##
+    ["tconstruct:cobalt_ore"] = true
+  },
   ["diamond"] = {
     ["minecraft:diamond_ore"] = true,
     ["minecraft:deepslate_diamond_ore"] = true
