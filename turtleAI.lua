@@ -228,7 +228,7 @@ function TunnelState:act()
   if self.miner.i > REPEATS then
     turtle.returnTo(0,1,0)
     turtle.turnTo(OPPOSITE_DIRECTION[START_DIR])
-    turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
+    tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
     error("User specified max mining cycles reached")
   end
   
@@ -237,7 +237,7 @@ function TunnelState:act()
     if turtle.getFuelLevel() < 500 then
       turtle.returnTo(0,1,0)
       turtle.turnTo(OPPOSITE_DIRECTION[START_DIR])
-      turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
+      tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
       error("Out of fuel")
     end
   end
@@ -347,12 +347,12 @@ function RefillState:act()
   -- change back to xray state
   turtle.returnTo(0,1,0)
   turtle.turnTo(OPPOSITE_DIRECTION[START_DIR])
-  turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
+  tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
   place_chest()
   store_valuables()
   dump_trash()
   turtle.turnTo(DIRECTIONS[START_DIR])
-  turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
+  tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
   if #self.miner.ore_path > 0 then
     self.miner:change_state("XrayMineState")
   else
