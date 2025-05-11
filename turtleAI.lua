@@ -82,15 +82,15 @@ local ORE_DICT = {
   -- ["deepresonance:resonating_ore_end"] = true,
 
     -- ## OVERWORLD LOGS ##
-  ["minecraft:oak_log"] = true,
-  ["minecraft:spruce_log"] = true,
-  ["minecraft:birch_log"] = true,
-  ["minecraft:jungle_log"] = true,
-  ["minecraft:acacia_log"] = true,
-  ["minecraft:dark_oak_log"] = true,
-  ["minecraft:mangrove_log"] = true,
-  ["minecraft:cherry_log"] = true,
-  ["minecraft:pale_oak_log"] = true,
+  -- ["minecraft:oak_log"] = true,
+  -- ["minecraft:spruce_log"] = true,
+  -- ["minecraft:birch_log"] = true,
+  -- ["minecraft:jungle_log"] = true,
+  -- ["minecraft:acacia_log"] = true,
+  -- ["minecraft:dark_oak_log"] = true,
+  -- ["minecraft:mangrove_log"] = true,
+  -- ["minecraft:cherry_log"] = true,
+  -- ["minecraft:pale_oak_log"] = true,
 }
 
 local GEOSCAN_SLOT = 16
