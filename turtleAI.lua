@@ -121,6 +121,20 @@ filters = {
     ["minecraft:mangrove_log"] = true,
     ["minecraft:cherry_log"] = true,
     ["minecraft:pale_oak_log"] = true
+  },
+  ["core"] = {
+    ["minecraft:diamond_ore"] = true,
+    ["minecraft:deepslate_diamond_ore"] = true,
+    ["minecraft:iron_ore"] = true,
+    ["minecraft:deepslate_iron_ore"] = true,
+    ["mekanism:uranium_ore"] = true,
+    ["mekanism:deepslate_uranium_ore"] = true,
+    ["minecraft:coal_ore"] = true,
+    ["minecraft:deepslate_coal_ore"] = true,
+    ["minecraft:gold_ore"] = true,
+    ["minecraft:deepslate_gold_ore"] = true,
+    ["minecraft:redstone_ore"] = true,
+    ["minecraft:deepslate_redstone_ore"] = true
   }
 }
 
