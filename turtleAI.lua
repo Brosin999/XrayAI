@@ -149,7 +149,6 @@ local function dump_trash(stacks_only)
     if item and not ORE_DICT[item.name] then
       turtle.select(i)
       turtle.drop(64)
-      end
     end
   end
   turtle.select(slot)
