@@ -70,16 +70,16 @@ local ORE_DICT = {
   ["thermal:sapphire_ore"] = true,
   ["thermal:deepslate_sapphire_ore"] = true,
 
-  -- RFTools-Base
-  ["rftoolsbase:dimensionalshard_overworld"] = true,
-  ["rftoolsbase:dimensionalshard_nether"] = true,
-  ["rftoolsbase:dimensionalshard_end"] = true,
+  -- -- RFTools-Base
+  -- ["rftoolsbase:dimensionalshard_overworld"] = true,
+  -- ["rftoolsbase:dimensionalshard_nether"] = true,
+  -- ["rftoolsbase:dimensionalshard_end"] = true,
 
-  -- Deep Resonance
-  ["deepresonance:resonating_ore_stone"] = true,
-  ["deepresonance:resonating_ore_deepslate"] = true,
-  ["deepresonance:resonating_ore_nether"] = true,
-  ["deepresonance:resonating_ore_end"] = true,
+  -- -- Deep Resonance
+  -- ["deepresonance:resonating_ore_stone"] = true,
+  -- ["deepresonance:resonating_ore_deepslate"] = true,
+  -- ["deepresonance:resonating_ore_nether"] = true,
+  -- ["deepresonance:resonating_ore_end"] = true,
 
     -- ## OVERWORLD LOGS ##
   ["minecraft:oak_log"] = true,
