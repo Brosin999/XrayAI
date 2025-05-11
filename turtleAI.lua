@@ -139,8 +139,8 @@ local tArgs = {...}
 local START_DIR = tArgs[1]
 local REPEATS = tonumber(tArgs[2]) or 1
 local DEFAULT_RADIUS = tonumber(tArgs[3]) or 8 
-local ADVANCE = toboolean(tArgs[4]) or true
-ORE_DICT = filters[tArgs[5]] or ORE_DICT
+local ADVANCE = true
+ORE_DICT = filters[tArgs[4]] or ORE_DICT
 
 
 assert(DIRECTIONS[START_DIR], "must specify a direction")
