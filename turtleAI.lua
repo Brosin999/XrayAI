@@ -93,6 +93,29 @@ local ORE_DICT = {
   ["minecraft:pale_oak_log"] = true,
 }
 
+filters = {
+  ["netherite"] = {["minecraft:ancient_debris"] = true},
+  ["diamond"] = {
+    ["minecraft:diamond_ore"] = true,
+    ["minecraft:deepslate_diamond_ore"] = true
+  },
+  ["iron"] = {
+    ["minecraft:iron_ore"] = true,
+    ["minecraft:deepslate_iron_ore"] = true
+  },
+  ["logs"] = {
+    ["minecraft:oak_log"] = true,
+    ["minecraft:spruce_log"] = true,
+    ["minecraft:birch_log"] = true,
+    ["minecraft:jungle_log"] = true,
+    ["minecraft:acacia_log"] = true,
+    ["minecraft:dark_oak_log"] = true,
+    ["minecraft:mangrove_log"] = true,
+    ["minecraft:cherry_log"] = true,
+    ["minecraft:pale_oak_log"] = true
+  }
+}
+
 local GEOSCAN_SLOT = 16
 local CHEST_SLOT = 15
 local STORAGE_SLOTS = List(1,2,3,4,5,6,7,8,9,10,11,12,13)
@@ -116,6 +139,8 @@ local tArgs = {...}
 local START_DIR = tArgs[1]
 local REPEATS = tonumber(tArgs[2]) or 1
 local DEFAULT_RADIUS = tonumber(tArgs[3]) or 8 
+
+ORE_DICT = filters[tArgs[4]] or ORE_DICT
 
 assert(DIRECTIONS[START_DIR], "must specify a direction")
 
