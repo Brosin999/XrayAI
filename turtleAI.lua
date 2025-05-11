@@ -193,7 +193,7 @@ function TunnelState:act()
   turtle.turnTo(DIRECTIONS[START_DIR])
   if self.miner.i == 1 then
     tunnel(1)
-  else 
+  else
     tunnel(DEFAULT_RADIUS * 2)
   end
   self.miner:change_state("ScanState")
@@ -219,7 +219,9 @@ function ScanState:act()
   turtle.placeDown()
   self:scan()
   turtle.digDown()
-  turtle.reset(0,1,0,START_DIR)
+  if self.miner.i == 1 then
+    turtle.reset(0,1,0,START_DIR)
+  end
   self.miner:change_state("XrayMineState")
 end
 
