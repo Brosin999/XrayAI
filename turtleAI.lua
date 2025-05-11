@@ -179,7 +179,6 @@ function TunnelState:act()
   -- tunnel forward 16 blocks
   -- switch to scan state
   
-  
   self.miner.i = self.miner.i + 1
   if self.miner.i > REPEATS then
     error("User specified max mining cycles reached")
@@ -196,6 +195,7 @@ function TunnelState:act()
     tunnel(1)
   else 
     tunnel(DEFAULT_RADIUS * 2)
+  end
   self.miner:change_state("ScanState")
 end
 
