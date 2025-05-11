@@ -134,6 +134,7 @@ local TRASH = {
 }
 
 local DIRECTIONS = {north=1, east=2, south=3, west=4}
+local OPPOSITE_DIRECTION = {south=1, west=2, north=3, east=4}
 
 local tArgs = {...}
 local START_DIR = tArgs[1]
@@ -167,6 +168,13 @@ local function tunnel(N)
     turtle.forward()
     turtle.digUp()
     turtle.digDown()
+  end
+end
+
+local function tunnel_minimal(N)
+    for i=1,N do
+    turtle.dig()
+    turtle.forward()
   end
 end
 
@@ -219,12 +227,17 @@ function TunnelState:act()
   self.miner.i = self.miner.i + 1
   if self.miner.i > REPEATS then
     turtle.returnTo(0,1,0)
+    turtle.turnTo(OPPOSITE_DIRECTION[START_DIR])
+    turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
     error("User specified max mining cycles reached")
   end
   
-  if turtle.getFuelLevel() < 300 then
+  if turtle.getFuelLevel() < 500 then
     refuel()
-    if turtle.getFuelLevel() < 300 then
+    if turtle.getFuelLevel() < 500 then
+      turtle.returnTo(0,1,0)
+      turtle.turnTo(OPPOSITE_DIRECTION[START_DIR])
+      turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
       error("Out of fuel")
     end
   end
@@ -232,9 +245,7 @@ function TunnelState:act()
   if self.miner.i == 1 then
     tunnel(DEFAULT_RADIUS)
   else
-    if ADVANCE then
-      tunnel(DEFAULT_RADIUS * 2 * (self.miner.i - 1))
-    end
+    tunnel(DEFAULT_RADIUS * 2)
   end
   self.miner:change_state("ScanState")
 end
@@ -259,9 +270,7 @@ function ScanState:act()
   turtle.placeDown()
   self:scan()
   turtle.digDown()
-  if self.miner.i == 1 then
-    turtle.reset(0,1,0,START_DIR)
-  end
+  turtle.reset(0,1,0,START_DIR)
   self.miner:change_state("XrayMineState")
 end
 
@@ -337,9 +346,13 @@ function RefillState:act()
   -- dropDown nontrash items
   -- change back to xray state
   turtle.returnTo(0,1,0)
+  turtle.turnTo(OPPOSITE_DIRECTION[START_DIR])
+  turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
   place_chest()
   store_valuables()
   dump_trash()
+  turtle.turnTo(DIRECTIONS[START_DIR])
+  turtle.tunnel_minimal(DEFAULT_RADIUS * self.miner.i)
   if #self.miner.ore_path > 0 then
     self.miner:change_state("XrayMineState")
   else
