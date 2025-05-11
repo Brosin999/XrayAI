@@ -139,8 +139,9 @@ local tArgs = {...}
 local START_DIR = tArgs[1]
 local REPEATS = tonumber(tArgs[2]) or 1
 local DEFAULT_RADIUS = tonumber(tArgs[3]) or 8 
+local ADVANCE = toboolean(tArgs[4]) or true
+ORE_DICT = filters[tArgs[5]] or ORE_DICT
 
-ORE_DICT = filters[tArgs[4]] or ORE_DICT
 
 assert(DIRECTIONS[START_DIR], "must specify a direction")
 
@@ -217,6 +218,7 @@ function TunnelState:act()
   
   self.miner.i = self.miner.i + 1
   if self.miner.i > REPEATS then
+    turtle.returnTo(0,1,0)
     error("User specified max mining cycles reached")
   end
   
@@ -228,9 +230,11 @@ function TunnelState:act()
   end
   turtle.turnTo(DIRECTIONS[START_DIR])
   if self.miner.i == 1 then
-    tunnel(1)
+    tunnel(DEFAULT_RADIUS)
   else
-    tunnel(DEFAULT_RADIUS * 2)
+    if ADVANCE then
+      tunnel(DEFAULT_RADIUS * 2 * (self.miner.i - 1))
+    end
   end
   self.miner:change_state("ScanState")
 end
@@ -255,7 +259,9 @@ function ScanState:act()
   turtle.placeDown()
   self:scan()
   turtle.digDown()
-  turtle.reset(0,1,0,START_DIR)
+  if self.miner.i == 1 then
+    turtle.reset(0,1,0,START_DIR)
+  end
   self.miner:change_state("XrayMineState")
 end
 
