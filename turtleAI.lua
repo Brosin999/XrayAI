@@ -172,7 +172,7 @@ local function tunnel(N)
 end
 
 local function tunnel_minimal(N)
-    for i=1,N do
+  for i=1,N do
     turtle.dig()
     turtle.forward()
   end
